@@ -1,10 +1,14 @@
+require("dotenv").config();
 const mongoose = require('mongoose')
+const colors = require('colors');
 
-const mongoURI ="mongodb+srv://SanoManjiro:VGuzyiqeLZ6Isick@cluster0.xukwrtj.mongodb.net/painandgain?retryWrites=true&w=majority"
+const db_connect= process.env.DB_CONNECTION
 
 const connectToMongo = ()=>{
-
-    mongoose.connect(mongoURI)
+    
+    mongoose.connect(db_connect,{dbName:process.env.DB_NAME})
+    .then((c)=> console.log(`DB connected to`.blue,`${c.connection.host}`.red))
+    .catch((e)=>console.log(`${e}`.red))
 
 }
 
